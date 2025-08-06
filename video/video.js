@@ -47,6 +47,7 @@ const displaycatagoris = (categories) => {
       src=${video.thumbnail}
       class="h-full w-full object-cover";
       alt="Shoes" />
+      <span class="absolute right-2 bottom-15 bg-black text-stone-50 rounded p-1">${video.others.posted_date}</span>
   </figure>
   <div class="pt-2 flex gap-4">
       <div>
@@ -55,8 +56,10 @@ const displaycatagoris = (categories) => {
       <div class="">
        <h2 class="font-bold"> ${video.title}</h2>
       <div class="flex   gap-3">
-       <p> ${video.authors[0].profile_name}</p>
-        <img class=" w-5 h-5 object-cover" src="https://cdn-icons-png.flaticon.com/128/9247/9247768.png"/>
+       <p class="text-gray-500"> ${video.authors[0].profile_name}</p>
+
+       ${video.authors[0].verified == true? '<img class=" w-5 h-5 object-cover" src="https://cdn-icons-png.flaticon.com/128/9247/9247768.png"/>':""}
+        
          </div>
   </div>
 
