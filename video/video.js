@@ -7,6 +7,7 @@ function gettime(time) {
 }
 
 
+
 //create loadcatagori
 const loadcatagories = () =>{
     fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -14,6 +15,13 @@ const loadcatagories = () =>{
     .then((data) =>displaycatagoris(data.categories))
     .catch((error) => console.log(error));
 };
+const loadcategorisVideos = (id) => {
+  
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+    .then((res) => res.json())
+    .then((data) =>displayvideos(data.category))
+    .catch((error) => console.log(error));
+}
 
 //category:"Music"
 //category_id: "1001"
@@ -25,12 +33,16 @@ const displaycatagoris = (categories) => {
         console.log(item); 
 
         //creat a button
-     const button = document.createElement("button");
-     button.classList = "btn";
-     button.innerText = item.category;
+     const buttonContener = document.createElement("div");
+     buttonContener.innerHTML = `
+      <button onclick="loadcategorisVideos('${item.category_id}')" class="btn">
+
+       ${item.category}
+       </button>
+     `;
      
      //add button to catagori contener 
-     categoriscontener.append(button);
+     categoriscontener.append(buttonContener);
     });
     };
 
@@ -44,6 +56,21 @@ const displaycatagoris = (categories) => {
     }
     const displayvideos = (videos) => {
        const videocontener = document.getElementById("videos");
+       videocontener .innerHTML= "";
+
+       if( videos.length == 0){
+        videocontener.classList.remove("grid");
+        videocontener.innerHTML =`
+        <div class="flex mt-15 flex-col gap-5 min-h-[300px] justify-center items-center ">
+         <img class="mt-15 " src="assets/Icon.png" />
+        </div>
+        `;
+        return;
+       }
+       else{
+         videocontener.classList.add("grid");
+       }
+
         videos.forEach((video) =>{
             console.log(video);
             const card = document.createElement("div");
@@ -56,7 +83,7 @@ const displaycatagoris = (categories) => {
       alt="Shoes" />
       ${
         video.others.posted_date?.length == 0 ? "":
-        `<span class="absolute right-2 bottom-15 bg-black text-stone-50 rounded p-1">${gettime}</span>`
+        `<span class="absolute right-2 bottom-15 bg-black text-stone-50 rounded p-1">${gettime( video.others.posted_date)}</span>`
       }
       
   </figure>
