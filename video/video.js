@@ -68,6 +68,9 @@ const displaycatagoris = (categories) => {
         .then((data) =>displayvideos(data.videos) )
         .catch((error) => console.log(error));
     }
+    const videodetails = (videoid) =>{
+              console.log(videoid);
+    }
     const displayvideos = (videos) => {
        const videocontener = document.getElementById("videos");
        videocontener .innerHTML= "";
@@ -113,8 +116,12 @@ const displaycatagoris = (categories) => {
        <p class="text-gray-500"> ${video.authors[0].profile_name}</p>
 
        ${video.authors[0].verified == true? '<img class=" w-5 h-5 object-cover" src="https://cdn-icons-png.flaticon.com/128/9247/9247768.png"/>':""}
-        
+
          </div>
+
+         <p><button onclick="loadDetails('${
+            video.video_id
+         }')" class="btn btn-sm btn-error"> details </button></p>
   </div>
 
   </div>
