@@ -1,3 +1,10 @@
+function gettime(time) {
+    const hour = parseInt(time / 3600);
+    let reminiscesecond = time % 3600;
+    const minute = parseInt(reminiscesecond / 60);
+    reminiscesecond = reminiscesecond % 60;
+    return `${hour} hour ${minute} minute ${reminiscesecond} second ago`;
+}
 
 
 //create loadcatagori
@@ -47,7 +54,11 @@ const displaycatagoris = (categories) => {
       src=${video.thumbnail}
       class="h-full w-full object-cover";
       alt="Shoes" />
-      <span class="absolute right-2 bottom-15 bg-black text-stone-50 rounded p-1">${video.others.posted_date}</span>
+      ${
+        video.others.posted_date?.length == 0 ? "":
+        `<span class="absolute right-2 bottom-15 bg-black text-stone-50 rounded p-1">${gettime}</span>`
+      }
+      
   </figure>
   <div class="pt-2 flex gap-4">
       <div>
