@@ -128,7 +128,9 @@ const displaycatagoris = (categories) => {
       `;
  videocontener.append(card);
   })
-    }
+    };
+
+    document.getElementById("search_input").addEventListener("keyup", ()=>{});
 loadcatagories();
 loadvideo();
 
